@@ -54,6 +54,8 @@ class StreamPlayer: NSObject {
         
         func complete(_ error: StreamError?) { completion(error) }
         
+        let urlString = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
         guard urlString != url?.absoluteString else { return complete(nil) }
         
         guard let url = URL(string: urlString) else { return complete(.unvalidURL) }
