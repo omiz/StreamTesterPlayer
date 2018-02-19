@@ -58,6 +58,12 @@ class StreamPlayer: NSObject {
         
         guard let url = URL(string: urlString) else { return complete(.unvalidURL) }
         
+        let asset = AVAsset(url: url)
+        
+        guard asset.isPlayable else { return complete(nil) }
+        
+        asset.cancelLoading()
+        
         item = AVPlayerItem(url: url)
         
         player.replaceCurrentItem(with: item)
